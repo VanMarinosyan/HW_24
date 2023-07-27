@@ -4,15 +4,9 @@ import datetime
 # HW_1________________________________________________________________
 
 def sector_area(r, alpha):
-    # Convert angle from degrees to radians
     angle_radians = math.radians(alpha)
-
-    # Calculate the area of the sector
     area = (math.pi * r ** 2) * angle_radians / (2 * math.pi)
-
     print(r, alpha, area)
-
-# Test the function
 radius = 5
 angle_degrees = 60
 sector_area(radius, angle_degrees)
@@ -21,13 +15,8 @@ sector_area(radius, angle_degrees)
 
 def get_day_of_week(year, month, day):
     try:
-        # Create a datetime object for the given date
         date_object = datetime.date(year, month, day)
-
-        # Get the day of the week (0 = Monday, 6 = Sunday)
         day_of_week = date_object.weekday()
-
-        # Convert the day of the week to a string representation
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         day_name = days[day_of_week]
 
@@ -35,7 +24,6 @@ def get_day_of_week(year, month, day):
     except ValueError:
         print("Invalid date.")
 
-# Test the program
 year = 2023
 month = 7
 day = 27
@@ -71,7 +59,6 @@ def arabic_to_roman(number):
 
     return roman_numeral
 
-# Test the function
 try:
     number = int(input("Enter an Arabic natural number (greater than 0): "))
     roman_numeral = arabic_to_roman(number)
