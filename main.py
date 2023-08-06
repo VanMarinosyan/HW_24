@@ -1,31 +1,65 @@
-# HW_1
+import math
 
-def generate_christmas_tree(height):
-    for i in range(height):
-        print(' ' * (height - i - 1) + '*' * (2 * i + 1))
+class Triangle:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
 
-generate_christmas_tree(5)
+        # Check if the sides form a valid triangle
+        if not self._is_valid_triangle():
+            raise ValueError("Invalid sides for a triangle")
 
-# hw_3
+    def _is_valid_triangle(self):
+        return (
+                self.a + self.b > self.c
+                and self.b + self.c > self.a
+                and self.a + self.c > self.b
+        )
 
-def climb_stairs(n):
-    if n <= 0:
-        return 0
-    elif n == 1:
-        return 1
-    elif n == 2:
-        return 2
+    def get_sides(self):
+        return self.a, self.b, self.c
 
-    dp = [0] * (n + 1)
-    dp[1] = 1
-    dp[2] = 2
+    def get_perimeter(self):
+        return self.a + self.b + self.c
 
-    for i in range(3, n + 1):
-        dp[i] = dp[i - 1] + dp[i - 2]
+    def get_area(self):
+        s = self.get_perimeter() / 2
+        area = math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
+        return area
 
-    return dp[n]
+    def get_triangle_type(self):
+        if self.a == self.b == self.c:
+            return "Equilateral"
+        elif self.a == self.b or self.a == self.c or self.b == self.c:
+            return "Isosceles"
+        else:
+            return "Irregular"
 
-n = 10
-ways = climb_stairs(n)
-print("Number of distinct ways to climb to the top:", ways)
+# Example usage:
+try:
+    triangle = Triangle(5, 5, 5)  # Equilateral triangle
+    print("Sides:", triangle.get_sides())
+    print("Perimeter:", triangle.get_perimeter())
+    print("Area:", triangle.get_area())
+    print("Triangle type:", triangle.get_triangle_type())
+except ValueError as error:
+    print("Error:", error)
 
+try:
+    triangle2 = Triangle(3, 4, 5)  # Right-angled triangle (Irregular)
+    print("Sides:", triangle2.get_sides())
+    print("Perimeter:", triangle2.get_perimeter())
+    print("Area:", triangle2.get_area())
+    print("Triangle type:", triangle2.get_triangle_type())
+except ValueError as error:
+    print("Error:", error)
+
+try:
+    triangle3 = Triangle(5, 5, 8)  # Isosceles triangle
+    print("Sides:", triangle3.get_sides())
+    print("Perimeter:", triangle3.get_perimeter())
+    print("Area:", triangle3.get_area())
+    print("Triangle type:", triangle3.get_triangle_type())
+except ValueError as error:
+    print("Error:", error)
